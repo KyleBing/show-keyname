@@ -1,15 +1,15 @@
-.unselectable, .btn-like {
+.unselectable, .tip, .btn-like, .clear-button {
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
 }
 
-.btn-like {
+.btn-like, .clear-button {
   white-space: nowrap;
   cursor: pointer;
 }
-.btn-like:active {
+.btn-like:active, .clear-button:active {
   transform: translateY(2px);
 }
 
@@ -20,6 +20,21 @@
 }
 [v-cloak] {
   display: none;
+}
+
+.btn-wrapper {
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.clear-button {
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  padding: 5px 10px;
+  text-align: center;
 }
 
 .key-list {

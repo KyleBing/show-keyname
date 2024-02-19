@@ -4,11 +4,14 @@
     <meta charset="UTF-8">
     <title>显示键名</title>
     <link rel="shortcut icon" href="logo.png" type="image/png">
-    <link rel="stylesheet" href="scss/main.css?v=20240219165018">
+    <link rel="stylesheet" href="scss/main.css?v=20240219180558">
 </head>
 <body>
 
 <div id="app" v-cloak>
+    <div class="btn-wrapper">
+        <div class="clear-button" @click="keyList = []">清空</div>
+    </div>
     <div v-if="keyList.length > 0" class="key-list">
         <div :class="['key-item', {active: item.isActive}]" v-for="item in keyList" :key="item.id"
             @click="item.isActive = !item.isActive"
@@ -40,10 +43,60 @@
             const keyList = ref([])
             const lastId = ref(0)
             onMounted(()=> {
-                window.addEventListener('keydown', event => {
+                window.addEventListener('wheel', event => {
+                    // console.log(event)
+                    let keyName = ''
+                    if (event.deltaY > 0){
+                        keyName = '滚动 ↓'
+                    } else if (event.deltaY === 0) {
+                    } else {
+                        keyName = '滚动 ↑'
+                    }
+                    if (event.deltaX > 0){
+                        keyName = '滚动 →'
+                    } else if (event.deltaX === 0) {
 
-                    console.log(event)
-                    keyList.value.unshift({
+                    } else {
+                        keyName = '滚动 ←'
+                    }
+
+                    keyList.value.push({
+                        id: lastId.value,
+                        isActive: false,
+                        key: keyName,
+                        code: `${event.deltaX} , ${event.deltaY}`,
+                        metaKey: event.metaKey,
+                        altKey: event.altKey,
+                        shiftKey: event.shiftKey,
+                        ctrlKey: event.ctrlKey
+                    })
+                    lastId.value = lastId.value + 1
+                })
+                window.addEventListener('mousedown', event => {
+                    // console.log(event)
+                    let keyName = ''
+                    switch (event.buttons){
+                        case 0: keyName = '鼠标空'; break
+                        case 1: keyName = '鼠标左击'; break
+                        case 2: keyName = '鼠标右击'; break
+                        case 4: keyName = '鼠标中击'; break
+                        case 8: keyName = '后退'; break
+                        case 16: keyName = '前进'; break
+                    }
+                    keyList.value.push({
+                        id: lastId.value,
+                        isActive: false,
+                        key: keyName,
+                        code: event.buttons,
+                        metaKey: event.metaKey,
+                        altKey: event.altKey,
+                        shiftKey: event.shiftKey,
+                        ctrlKey: event.ctrlKey
+                    })
+                    lastId.value = lastId.value + 1
+                })
+                window.addEventListener('keydown', event => {
+                    keyList.value.push({
                         id: lastId.value,
                         isActive: false,
                         key: event.key,
@@ -54,7 +107,7 @@
                         ctrlKey: event.ctrlKey
                     })
                     lastId.value = lastId.value + 1
-                    if (/^[ir]$/.test(event.key)){
+                    if (/^Key[IR]$/ig.test(event.code)){
 
                     } else {
                         event.preventDefault()

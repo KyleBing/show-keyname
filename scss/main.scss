@@ -5,6 +5,21 @@
   display: none;
 }
 
+
+.btn-wrapper{
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.clear-button{
+  @include border-radius(5px);
+  border: 1px solid $color-border;
+  padding: 5px 10px;
+  text-align: center;
+  @extend .btn-like
+}
+
 .key-list{
   display: flex;
   flex-flow: row wrap;
@@ -78,6 +93,7 @@
 
 
 .tip{
+  @extend .unselectable;
   text-align: center;
   font-weight: bold;
   font-size: 40px;
