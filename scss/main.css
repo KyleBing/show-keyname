@@ -1,0 +1,117 @@
+.unselectable, .btn-like {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.btn-like {
+  white-space: nowrap;
+  cursor: pointer;
+}
+.btn-like:active {
+  transform: translateY(2px);
+}
+
+@media (max-width: 768px) {
+  .hide-in-mobile {
+    display: none;
+  }
+}
+[v-cloak] {
+  display: none;
+}
+
+.key-list {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: flex-start;
+}
+
+.key-item {
+  cursor: pointer;
+  display: flex;
+  justify-content: flex-start;
+  text-align: center;
+  min-width: 30px;
+  margin-right: 10px;
+  margin-bottom: 10px;
+  padding: 6px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  position: relative;
+}
+.key-item .key-face {
+  padding: 0 10px;
+}
+.key-item .key-face .key-name {
+  font-size: 24px;
+  font-weight: bold;
+  min-height: 24px;
+}
+.key-item .key-face .key-code {
+  color: #8E8E93;
+  font-size: 10px;
+}
+.key-item .special-key-list {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-flow: column nowrap;
+}
+.key-item .special-key-list .special-key {
+  line-height: 1;
+  padding: 1px 3px;
+  font-size: 10px;
+  color: rgba(0, 0, 0, 0.1);
+}
+.key-item .special-key-list .special-key.active {
+  font-weight: bold;
+  color: #007AFF;
+}
+.key-item:active {
+  -webkit-transform: translateY(2px);
+  -moz-transform: translateY(2px);
+  -ms-transform: translateY(2px);
+  -o-transform: translateY(2px);
+  transform: translateY(2px);
+}
+.key-item:hover, .key-item.active {
+  background-color: black;
+  border-color: black;
+}
+.key-item:hover .key-face .key-name, .key-item.active .key-face .key-name {
+  color: white;
+}
+.key-item:hover .key-face .key-code, .key-item.active .key-face .key-code {
+  color: #8E8E93;
+}
+.key-item:hover .special-key-list .special-key, .key-item.active .special-key-list .special-key {
+  color: rgba(255, 255, 255, 0.3);
+}
+.key-item:hover .special-key-list .special-key.active, .key-item.active .special-key-list .special-key.active {
+  color: #4CD964;
+}
+
+.tip {
+  text-align: center;
+  font-weight: bold;
+  font-size: 40px;
+  color: rgba(0, 0, 0, 0.5);
+}
+
+.share-link {
+  color: #8E8E93;
+  position: fixed;
+  bottom: 10px;
+  right: 10px;
+  font-size: 10px;
+}
+.share-link a {
+  color: #8E8E93;
+}
+.share-link a:hover {
+  color: black;
+}

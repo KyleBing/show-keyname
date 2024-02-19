@@ -1,0 +1,99 @@
+@import "plugin";
+
+
+[v-cloak] {
+  display: none;
+}
+
+.key-list{
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: flex-start;
+}
+
+.key-item{
+  cursor: pointer;
+  display: flex;
+  justify-content: flex-start;
+  text-align: center;
+  min-width: 30px;
+  margin-right: 10px;
+  margin-bottom: 10px;
+  padding: 6px;
+  @include border-radius(10px);
+  border: 1px solid $color-border;
+  position: relative;
+  .key-face{
+    padding: 0 10px;
+    .key-name{
+      font-size: $fz-big;
+      font-weight: bold;
+      min-height: $fz-big;
+    }
+    .key-code{
+      color: $gray;
+      font-size: $fz-tiny;
+    }
+  }
+  .special-key-list{
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-flow: column nowrap;
+    .special-key{
+      line-height: 1;
+      padding: 1px 3px;
+      font-size: $fz-tiny;
+      color: transparentize(black, 0.9);
+      &.active{
+        font-weight: bold;
+        color: $blue;
+      }
+    }
+  }
+  &:active{
+    @include transform(translateY(2px))
+  }
+  &:hover, &.active{
+    background-color: black;
+    border-color: black;
+    .key-face{
+      .key-name{
+        color: white;
+      }
+      .key-code{
+        color: $gray;
+      }
+    }
+    .special-key-list{
+      .special-key{
+        color: transparentize(white, 0.7);
+        &.active{
+          color: $green;
+        }
+      }
+    }
+  }
+}
+
+
+.tip{
+  text-align: center;
+  font-weight: bold;
+  font-size: 40px;
+  color: transparentize(black, 0.5);
+}
+
+.share-link{
+  color: $gray;
+  position: fixed;
+  bottom: 10px;
+  right: 10px;
+  font-size: $fz-tiny;
+  a{
+    color: $gray;
+    &:hover{
+      color: black;
+    }
+  }
+}

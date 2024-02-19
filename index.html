@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>显示键名</title>
+    <link rel="shortcut icon" href="logo.png" type="image/png">
+    <link rel="stylesheet" href="scss/main.css?v=20240219165018">
+</head>
+<body>
+
+<div id="app" v-cloak>
+    <div v-if="keyList.length > 0" class="key-list">
+        <div :class="['key-item', {active: item.isActive}]" v-for="item in keyList" :key="item.id"
+            @click="item.isActive = !item.isActive"
+        >
+            <div class="special-key-list">
+                <div :class="['special-key', {active: item.shiftKey}]">SHIFT</div>
+                <div :class="['special-key', {active: item.ctrlKey}]">CTRL</div>
+                <div :class="['special-key', {active: item.altKey}]">ALT</div>
+                <div :class="['special-key', {active: item.metaKey}]">META</div>
+            </div>
+            <div class="key-face">
+                <div class="key-name">{{item.key}}</div>
+                <div class="key-code">{{item.code}}</div>
+            </div>
+
+        </div>
+    </div>
+    <div v-else class="tip">按键显示键名</div>
+
+    <div class="share-link">github: <a target="_blank" href="https://github.com/KyleBing/show-keyname">https://github.com/KyleBing/show-keyname</a></div>
+</div>
+
+</body>
+<script type="module">
+    import { createApp, onMounted, ref } from 'https://unpkg.com/vue@3/dist/vue.esm-browser.js'
+
+    createApp({
+        setup() {
+            const keyList = ref([])
+            const lastId = ref(0)
+            onMounted(()=> {
+                window.addEventListener('keydown', event => {
+
+                    console.log(event)
+                    keyList.value.unshift({
+                        id: lastId.value,
+                        isActive: false,
+                        key: event.key,
+                        code: event.code,
+                        metaKey: event.metaKey,
+                        altKey: event.altKey,
+                        shiftKey: event.shiftKey,
+                        ctrlKey: event.ctrlKey
+                    })
+                    lastId.value = lastId.value + 1
+                    if (/^[ir]$/.test(event.key)){
+
+                    } else {
+                        event.preventDefault()
+                    }
+                })
+            })
+            return {
+                keyList,
+            }
+        },
+
+    }).mount('#app')
+</script>
+</html>
