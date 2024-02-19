@@ -40,6 +40,73 @@
             const keyList = ref([])
             const lastId = ref(0)
             onMounted(()=> {
+                if ("mediaSession" in navigator){
+                    navigator.mediaSession.setActionHandler("play", () => {
+                        keyList.value.unshift({
+                            id: lastId.value,
+                            isActive: false,
+                            key: 'play',
+                            code: 'play',
+                            metaKey: false,
+                            altKey: false,
+                            shiftKey: false,
+                            ctrlKey: false
+                        })
+                        /* Code excerpted. */
+                    });
+                    navigator.mediaSession.setActionHandler("pause", () => {
+                        keyList.value.unshift({
+                            id: lastId.value,
+                            isActive: false,
+                            key: 'pause',
+                            code: 'pause',
+                            metaKey: false,
+                            altKey: false,
+                            shiftKey: false,
+                            ctrlKey: false
+                        })
+                        /* Code excerpted. */
+                    });
+                    navigator.mediaSession.setActionHandler("stop", () => {
+                        /* Code excerpted. */
+                    });
+                    navigator.mediaSession.setActionHandler("seekbackward", () => {
+                        /* Code excerpted. */
+                    });
+                    navigator.mediaSession.setActionHandler("seekforward", () => {
+                        /* Code excerpted. */
+                    });
+                    navigator.mediaSession.setActionHandler("seekto", () => {
+                        /* Code excerpted. */
+                    });
+                    navigator.mediaSession.setActionHandler("previoustrack", () => {
+                        /* Code excerpted. */
+                    });
+                    navigator.mediaSession.setActionHandler("nexttrack", () => {
+                        keyList.value.unshift({
+                            id: lastId.value,
+                            isActive: false,
+                            key: 'nexttrack',
+                            code: 'nexttrack',
+                            metaKey: false,
+                            altKey: false,
+                            shiftKey: false,
+                            ctrlKey: false
+                        })
+                        /* Code excerpted. */
+                    });
+                    navigator.mediaSession.setActionHandler("togglecamera", () => {
+                        /* Code excerpted. */
+                    });
+                    navigator.mediaSession.setActionHandler("togglemicrophone", () => {
+                        /* Code excerpted. */
+                    });
+                    navigator.mediaSession.setActionHandler("hangup", () => {
+                        /* Code excerpted. */
+                    });
+
+                }
+
                 window.addEventListener('keydown', event => {
 
                     console.log(event)
@@ -53,13 +120,13 @@
                         shiftKey: event.shiftKey,
                         ctrlKey: event.ctrlKey
                     })
-                    lastId.value = lastId.value + 1
                     if (/^[ir]$/.test(event.key)){
 
                     } else {
                         event.preventDefault()
                     }
                 })
+                lastId.value = lastId.value + 1
             })
             return {
                 keyList,
